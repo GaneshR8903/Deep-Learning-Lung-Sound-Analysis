@@ -99,11 +99,11 @@ def predict_disease(mfcc, models, label_encoder):
 # Load models
 models = []
 model_paths = [
-    r"Data\Record\Fold_0_model_weights_Epoch_Final.pth",
-    r"Data\Record\Fold_1_model_weights_Epoch_Final.pth",
-    r"Data\Record\Fold_2_model_weights_Epoch_Final.pth",
-    r"Data\Record\Fold_3_model_weights_Epoch_Final.pth",
-    r"Data\Record\Fold_4_model_weights_Epoch_Final.pth"
+    r"app\Fold_0_model_weights_Epoch_Final.pth",
+    r"app\Fold_1_model_weights_Epoch_Final.pth",
+    r"app\Fold_2_model_weights_Epoch_Final.pth",
+    r"app\Fold_3_model_weights_Epoch_Final.pth",
+    r"app\Fold_4_model_weights_Epoch_Final.pth"
 ]
 
 for path in model_paths:
