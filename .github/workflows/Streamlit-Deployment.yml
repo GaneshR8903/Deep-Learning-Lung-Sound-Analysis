@@ -1,0 +1,40 @@
+name: Streamlit Deployment
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow when pushing to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up SSH key for deployment
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Step 3: Install dependencies on the server
+      - name: Install dependencies on the server
+        run: |
+          ssh -o StrictHostKeyChecking=no user@your-server-ip "
+            cd /path/to/your/app &&
+            python3 -m venv venv &&
+            source venv/bin/activate &&
+            pip install -r requirements.txt
+          "
+
+      # Step 4: Run Streamlit app on server
+      - name: Run Streamlit app on server
+        run: |
+          ssh -o StrictHostKeyChecking=no user@your-server-ip "
+            cd /path/to/your/app &&
+            source venv/bin/activate &&
+            streamlit run app/app.py
+          "
