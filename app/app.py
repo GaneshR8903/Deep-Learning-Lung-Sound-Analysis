@@ -2,16 +2,16 @@ import streamlit as st
 import torch
 import torchaudio
 import librosa
+import os
 import numpy as np
 import matplotlib.pyplot as plt
-import requests
-from io import BytesIO
 from scipy.signal import butter, lfilter
 from sklearn.preprocessing import LabelEncoder
 from Deep_learning import DatasetLoad, CNN_Model, Train_one_epoch, Evaluate, \
     Get_mean_and_std, Recod_and_Save_Train_Detial, FNN_Model
 
 # Define a function to load the model
+@st.cache_resource
 def load_model(model_path, num_classes=10):
     model = CNN_Model(num_classes=num_classes)
     state_dict = torch.load(model_path, map_location=torch.device('cpu'))
@@ -101,11 +101,11 @@ def predict_disease(mfcc, models, label_encoder):
 # Load models
 models = []
 model_paths = [
-    r"app\Fold_0_model_weights_Epoch_Final.pth",
-    r"app\Fold_1_model_weights_Epoch_Final.pth",
-    r"app\Fold_2_model_weights_Epoch_Final.pth",
-    r"app\Fold_3_model_weights_Epoch_Final.pth",
-    r"app\Fold_4_model_weights_Epoch_Final.pth"
+    os.path.join('app', 'Fold_0_model_weights_Epoch_Final.pth'),
+    os.path.join('app', 'Fold_1_model_weights_Epoch_Final.pth'),
+    os.path.join('app', 'Fold_2_model_weights_Epoch_Final.pth'),
+    os.path.join('app', 'Fold_3_model_weights_Epoch_Final.pth'),
+    os.path.join('app', 'Fold_4_model_weights_Epoch_Final.pth')
 ]
 
 for path in model_paths:
