@@ -21,7 +21,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       # Step 3: Install dependencies on the server
-      - name: Install dependencies on server
+      - name: Install dependencies on the server
         run: |
           ssh -o StrictHostKeyChecking=no user@your-server-ip "
             cd /path/to/your/app &&
